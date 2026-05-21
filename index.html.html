@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Engineers Ireland 2 Day PSDP Course — Multiple Choice Exam</title>
+<style>
+  :root {
+    --brand: #2896D1;
+    --brand-dark: #1f78ab;
+    --ok: #2e7d32;
+    --bad: #c62828;
+    --bg: #f6f8fa;
+    --card: #ffffff;
+    --ink: #1a1a1a;
+    --muted: #5b6573;
+    --border: #e1e6ec;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Century Gothic", "Apple SD Gothic Neo", "Segoe UI", system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.5;
+  }
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--brand);
+    color: white;
+    padding: 14px 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.18);
+  }
+  header h1 { margin: 0 0 4px; font-size: 17px; font-weight: 600; }
+  header p { margin: 0; opacity: .92; font-size: 12px; }
+  .logos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 10px;
+  }
+  .logos a {
+    display: inline-flex;
+    align-items: center;
+    background: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.18);
+    transition: transform .15s;
+  }
+  .logos a:hover { transform: translateY(-1px); }
+  .logos img {
+    display: block;
+    height: 28px;
+    width: auto;
+  }
+  @media (max-width: 480px) {
+    .logos img { height: 22px; }
+    .logos a { padding: 4px 8px; }
+  }
+  .scoreboard {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+    background: rgba(255,255,255,.12);
+    border-radius: 8px;
+    padding: 8px 12px;
+  }
+  .stat { text-align: center; }
+  .stat .label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    opacity: .82;
+  }
+  .stat .value {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  .stat .value small { font-size: 12px; font-weight: 400; opacity: .8; }
+  .header-progress {
+    height: 4px;
+    background: rgba(255,255,255,.22);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 8px;
+  }
+  .header-progress-bar {
+    height: 100%;
+    background: white;
+    width: 0%;
+    transition: width .25s;
+  }
+  @media (max-width: 600px) {
+    .scoreboard { grid-template-columns: repeat(2, 1fr); }
+    .stat .value { font-size: 16px; }
+  }
+  main { max-width: 880px; margin: 18px auto; padding: 0 16px 80px; }
+  .intro, .question, .results {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 22px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 2px rgba(0,0,0,.03);
+  }
+  .intro h2 { margin: 0 0 8px; font-size: 18px; color: var(--brand-dark); }
+  .intro p { margin: 6px 0; font-size: 14px; color: var(--muted); }
+  .sources {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 2px rgba(0,0,0,.03);
+    overflow: hidden;
+  }
+  .sources summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 16px 22px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--brand-dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .sources summary::-webkit-details-marker { display: none; }
+  .sources summary::after {
+    content: "▼";
+    font-size: 10px;
+    color: var(--muted);
+    transition: transform .2s;
+  }
+  .sources[open] summary::after { transform: rotate(180deg); }
+  .sources .body { padding: 0 22px 20px; font-size: 14px; }
+  .sources h3 {
+    margin: 14px 0 6px;
+    font-size: 14px;
+    color: var(--ink);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 4px;
+  }
+  .sources ul { margin: 4px 0 8px; padding-left: 20px; }
+  .sources li { margin: 4px 0; color: var(--ink); }
+  .sources a {
+    color: var(--brand);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .sources a:hover { text-decoration: underline; }
+  .sources .hint { color: var(--muted); font-size: 12px; font-style: italic; }
+  .question h3 {
+    margin: 0 0 12px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .q-num { color: var(--brand); margin-right: 6px; }
+  .options { list-style: none; padding: 0; margin: 0; }
+  .options li { margin: 6px 0; }
+  .options label {
+    display: block;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background .15s, border-color .15s;
+  }
+  .options label:hover { background: #f0f7fc; border-color: var(--brand); }
+  .options input[type="radio"] { margin-right: 10px; }
+  .options input[type="radio"]:checked + span { font-weight: 600; }
+  .options label.correct {
+    background: #e8f5e9;
+    border-color: var(--ok);
+  }
+  .options label.incorrect {
+    background: #ffebee;
+    border-color: var(--bad);
+  }
+  .options label.scored {
+    position: relative;
+  }
+  .options label.scored::after {
+    content: "first answer · counted";
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: var(--muted);
+    background: rgba(255,255,255,.8);
+    padding: 2px 6px;
+    border-radius: 3px;
+  }
+  .feedback {
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-left: 3px solid var(--brand);
+    background: #f0f7fc;
+    font-size: 13px;
+    color: var(--ink);
+    border-radius: 0 4px 4px 0;
+  }
+  .feedback.wrong { border-left-color: var(--bad); background: #fff5f5; }
+  .feedback.right { border-left-color: var(--ok); background: #f0f9f1; }
+  .actions {
+    position: sticky;
+    bottom: 12px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 18px;
+  }
+  button {
+    font-family: inherit;
+    font-size: 15px;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    box-shadow: 0 2px 6px rgba(0,0,0,.12);
+  }
+  button.primary { background: var(--brand); color: white; }
+  button.primary:hover { background: var(--brand-dark); }
+  button.secondary { background: #6c757d; color: white; }
+  button.secondary:hover { background: #545b62; }
+  button:disabled { opacity: .55; cursor: not-allowed; }
+  .results {
+    background: linear-gradient(135deg, var(--brand) 0%, var(--brand-dark) 100%);
+    color: white;
+    text-align: center;
+  }
+  .results h2 { margin: 0 0 8px; font-size: 28px; }
+  .results .score { font-size: 48px; font-weight: 700; margin: 8px 0; }
+  .results p { margin: 4px 0; opacity: .95; }
+  footer {
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+    padding: 20px;
+  }
+  @media print {
+    .actions, header { display: none; }
+    .question, .intro, .results { box-shadow: none; break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logos">
+    <a href="https://www.engineersireland.ie" target="_blank" rel="noopener" title="Engineers Ireland">
+      <img src="engineers_ireland_logo.svg" alt="Engineers Ireland">
+    </a>
+    <a href="https://www.acei.ie" target="_blank" rel="noopener" title="Association of Consulting Engineers of Ireland">
+      <img src="acei_logo.png" alt="ACEI — Association of Consulting Engineers of Ireland">
+    </a>
+  </div>
+  <h1>Engineers Ireland 2 Day PSDP Course — Multiple Choice Exam</h1>
+  <p>100-question self-assessment based on the Engineers Ireland Project Supervisor Design Process course — answers grade live as you go.</p>
+  <div class="scoreboard">
+    <div class="stat">
+      <div class="label">Question</div>
+      <div class="value"><span id="currentQ">1</span><small> / 100</small></div>
+    </div>
+    <div class="stat">
+      <div class="label">Answered</div>
+      <div class="value"><span id="answered">0</span><small> / 100</small></div>
+    </div>
+    <div class="stat">
+      <div class="label">Score</div>
+      <div class="value"><span id="scoreNow">0</span><small> correct</small></div>
+    </div>
+    <div class="stat">
+      <div class="label">Overall</div>
+      <div class="value"><span id="pctNow">0</span><small>%</small></div>
+    </div>
+  </div>
+  <div class="header-progress"><div class="header-progress-bar" id="progressBar"></div></div>
+</header>
+
+<main>
+  <div class="intro">
+    <h2>Instructions</h2>
+    <p>Answer each of the 100 multiple-choice questions by picking the single best answer. Each answer is <strong>graded immediately</strong> — the running score and percentage update in the header above. <strong>Only your first answer counts toward the score</strong>, but the radios stay live so you can click around the other options for review. The originally scored answer is tagged with a <em>"first answer · counted"</em> badge. The pass mark for the live exam is typically 70% (70 / 100). Use <strong>Submit Exam</strong> at the bottom to lock in any skipped questions and see your final result.</p>
+  </div>
+
+  <details class="sources">
+    <summary>Sources &amp; further reading — download the regulations and guidance</summary>
+    <div class="body">
+      <p class="hint">All sources below are free to download. The HSA and Irish Statute Book are the authoritative starting points; Engineers Ireland and ACEI host the joint industry guidance referenced throughout the course.</p>
+
+      <h3>1. Official legal text — Irish Statute Book</h3>
+      <ul>
+        <li><a href="https://www.hsa.ie/media/1mzdgccl/si_291_2013.pdf" target="_blank" rel="noopener"><strong>S.I. No. 291/2013</strong> — Safety, Health and Welfare at Work (Construction) Regulations 2013 (HSA PDF, verified)</a> <span class="hint">(the core regulations — direct PDF download from the HSA)</span></li>
+        <li><a href="https://www.irishstatutebook.ie/eli/2013/si/291/made/en/print" target="_blank" rel="noopener">S.I. No. 291/2013 — same regulations on the Irish Statute Book (verified)</a> <span class="hint">(canonical legal text)</span></li>
+        <li><a href="https://www.irishstatutebook.ie/eli/2005/act/10/enacted/en/print" target="_blank" rel="noopener"><strong>Act No. 10 of 2005</strong> — Safety, Health and Welfare at Work Act 2005</a> <span class="hint">(framework legislation; see ss.15, 17, 58)</span></li>
+        <li><a href="https://www.irishstatutebook.ie/eli/2007/si/299/made/en/print" target="_blank" rel="noopener"><strong>S.I. No. 299/2007</strong> — Safety, Health and Welfare at Work (General Application) Regulations 2007</a></li>
+        <li><a href="https://www.irishstatutebook.ie/eli/2006/si/386/made/en/print" target="_blank" rel="noopener"><strong>S.I. No. 386/2006</strong> — Exposure to Asbestos Regulations 2006</a></li>
+        <li><a href="https://www.irishstatutebook.ie/eli/2010/si/589/made/en/print" target="_blank" rel="noopener"><strong>S.I. No. 589/2010</strong> — Exposure to Asbestos (Amendment) Regulations 2010</a></li>
+        <li><a href="https://www.irishstatutebook.ie" target="_blank" rel="noopener">irishstatutebook.ie</a> — for any other S.I.s or amending instruments</li>
+      </ul>
+
+      <h3>2. HSA — guidance and forms <span class="hint">(all links go to a direct PDF unless noted)</span></h3>
+      <ul>
+        <li><a href="https://www.hsa.ie/media/1t4ku0l3/guidelines-on-procurement-const-regs-2013.pdf" target="_blank" rel="noopener"><em>Guidelines on the Procurement, Design and Management Requirements of the SHWW (Construction) Regulations 2013</em> (verified)</a> <span class="hint">(the main companion document)</span></li>
+        <li><a href="https://www.hsa.ie/media/ed4dfr2x/key-duties-summary-construction.pdf" target="_blank" rel="noopener"><em>Summary of Key Duties under the Procurement, Design and Site Management Requirements</em> (verified)</a></li>
+        <li><a href="https://www.hsa.ie/eng/publications_and_forms/publications/construction/clients_in_construction_best_practice_guidance.pdf" target="_blank" rel="noopener"><em>Clients in Construction — Best Practice Guidance</em> (verified)</a></li>
+        <li><a href="https://www.hsa.ie/eng/Publications_and_Forms/Publications/Construction/homeowners_guidance.pdf" target="_blank" rel="noopener"><em>Getting Construction Work Done Safely — Guide for Homeowners</em> (verified)</a></li>
+        <li><a href="https://www.hsa.ie/eng/topics/asbestos/" target="_blank" rel="noopener">HSA Asbestos topic page</a> <span class="hint">(landing page — the ACM Practical Guidelines PDF is linked from here)</span></li>
+        <li><a href="https://www.hsa.ie/eng/Publications_and_Forms/Forms/AF_1_form.pdf" target="_blank" rel="noopener"><strong>Form AF1</strong> — Notification to HSA before the design process begins (verified)</a></li>
+        <li><a href="https://www.hsa.ie/eng/Publications_and_Forms/Publications/Construction/" target="_blank" rel="noopener">HSA Publications → Construction (landing page)</a> <span class="hint">(for everything else, including the Guide for Contractors and Project Supervisors)</span></li>
+      </ul>
+
+      <h3>3. HSA Codes of Practice <span class="hint">(all direct PDFs, verified)</span></h3>
+      <ul>
+        <li><a href="https://www.hsa.ie/media/hdah4isz/code_of_practice_for_safety_in_roofwork.pdf" target="_blank" rel="noopener">Code of Practice for Safety in Roofwork (2016)</a></li>
+        <li><a href="https://www.hsa.ie/media/0tlazdod/scaffolds-cop-2023.pdf" target="_blank" rel="noopener">Code of Practice for Access and Working Scaffolds (2023)</a> <span class="hint">(2023 edition; supersedes the 2008 COP referenced in the slides)</span></li>
+        <li><a href="https://www.hsa.ie/eng/publications_and_forms/publications/codes_of_practice/cop_confined_space.pdf" target="_blank" rel="noopener">Code of Practice for Working in Confined Spaces (2017)</a></li>
+        <li><a href="https://www.hsa.ie/media/4dpjtpaq/underground_services_cop.pdf" target="_blank" rel="noopener">Code of Practice for Avoiding Danger from Underground Services (2016)</a></li>
+        <li><a href="https://www.hsa.ie/eng/publications_and_forms/publications/codes_of_practice/avoiding_danger_from_overhead_electricity_lines.pdf" target="_blank" rel="noopener">Code of Practice for Avoiding Danger from Overhead Electricity Lines (May 2019)</a> <span class="hint">(May 2019 edition; supersedes the 2008 COP referenced in the slides)</span></li>
+        <li><a href="https://www.hsa.ie/media/jbgitwf2/cop-design_and_installation_of_anchors__.pdf" target="_blank" rel="noopener">Code of Practice for the Design and Installation of Anchors (2017)</a></li>
+        <li><a href="https://www.hsa.ie/media/mgopyw3v/code-of-practice-for-three-or-less-working-on-roads.pdf" target="_blank" rel="noopener">Code of Practice for Contractors with Three or Less Employees Working on Roads (2016)</a></li>
+      </ul>
+
+      <h3>4. Engineers Ireland / ACEI / RIAI — joint industry guidance <span class="hint">(landing pages — most of these are paid CPD publications or members-only documents, not free PDFs)</span></h3>
+      <ul>
+        <li><a href="https://acei.ie/Publications" target="_blank" rel="noopener">ACEI Publications (catalogue / order form)</a> — Briefing Notes 1, 2 and 3 and the Advice Notes on PW/TW Certificates and Anchors are ordered from here</li>
+        <li><a href="https://www.engineersireland.ie/Professionals/CPD-Careers/CPD-training-courses-by-theme/Health-and-Safety-Training-Courses/Designing-for-Safety-in-Construction" target="_blank" rel="noopener">Engineers Ireland — Designing for Safety in Construction (CPD course)</a> <span class="hint">(the joint EI / ACEI / RIAI manual by Jack Kavanagh is delivered through this course)</span></li>
+        <li><a href="https://www.engineersireland.ie/Professionals/CPD-Careers/CPD-training-courses-by-theme/Health-and-Safety-Training-Courses/Project-Supervisor-Design-Process" target="_blank" rel="noopener">Engineers Ireland — Project Supervisor Design Process (PSDP) course</a></li>
+        <li><a href="https://www.hsa.ie/eng/your_industry/construction/construction_duty_holders/project_supervisor_design_process_psdp_/" target="_blank" rel="noopener">HSA — Project Supervisor Design Process (PSDP) topic page</a> <span class="hint">(useful summary of the PSDP role and links to all relevant HSA documents)</span></li>
+      </ul>
+
+      <h3>5. Reporting and notification</h3>
+      <ul>
+        <li>AF1 notifications by registered post: HSA, The Metropolitan Building, James Joyce Street, Dublin 1</li>
+        <li>AF1 by e-mail (HSA-directed): <a href="mailto:wcu@hsa.ie">wcu@hsa.ie</a></li>
+      </ul>
+    </div>
+  </details>
+
+  <form id="examForm"></form>
+
+  <div class="actions">
+    <button type="button" class="primary" id="submitBtn">Submit Exam</button>
+    <button type="button" class="secondary" id="resetBtn">Reset</button>
+  </div>
+
+  <div id="resultsContainer"></div>
+</main>
+
+<footer>Self-assessment tool — not an official Engineers Ireland exam. Always consult S.I. No. 291 of 2013 and the HSA Guidelines for authoritative guidance.</footer>
+
+<script>
+const QUESTIONS = [
+  {
+    q: "Which Irish Statutory Instrument contains the Safety, Health and Welfare at Work (Construction) Regulations currently in force?",
+    options: ["S.I. No. 504 of 2006", "S.I. No. 291 of 2013", "S.I. No. 299 of 2007", "S.I. No. 481 of 2010"],
+    a: 1,
+    why: "S.I. No. 291 of 2013, effective 1 August 2013, is the current Construction Regulations."
+  },
+  {
+    q: "The Safety, Health and Welfare at Work Act 2005 is best described as:",
+    options: ["A detailed code prescribing exact construction methods", "Framework legislation providing broad general duties and a basis for making regulations", "A voluntary code of practice", "An EU directive transposed verbatim"],
+    a: 1,
+    why: "The 2005 Act is framework in nature; detailed duties flow from regulations made under it."
+  },
+  {
+    q: "Compliance with HSA Guidelines is:",
+    options: ["Compulsory in all cases", "Not compulsory, but following them will normally satisfy the law", "Required only on public sector projects", "Required only for projects over €1m"],
+    a: 1,
+    why: "Guidelines are persuasive — following them is normally enough to comply, but other means are permitted."
+  },
+  {
+    q: "Under Regulation 6, a client must appoint a competent PSDP:",
+    options: ["Before any contractor mobilises on site", "At or before the start of the design process", "Within 30 days of planning permission", "Only once tenders have been returned"],
+    a: 1,
+    why: "Reg 6 requires PSDP appointment at or before the start of design."
+  },
+  {
+    q: "Client appointments of project supervisors must be:",
+    options: ["Verbal, with a follow-up email", "In writing, with written acceptance obtained from the appointee", "Lodged with the HSA before they take effect", "Witnessed by a solicitor"],
+    a: 1,
+    why: "Reg 6(1) requires written appointment and written acceptance."
+  },
+  {
+    q: "Which of the following CANNOT be appointed as PSDP?",
+    options: ["A competent individual", "A competent body corporate", "A partnership as a partnership", "The client themselves, if competent"],
+    a: 2,
+    why: "A partnership or unincorporated JV cannot be appointed; individual partners may be appointed in their own right."
+  },
+  {
+    q: "Notification to the HSA on Form AF1 is required when construction work is planned to last longer than:",
+    options: ["10 working days or 100 person days", "20 working days or 250 person days", "30 working days or 500 person days", "60 working days or 1,000 person days"],
+    a: 2,
+    why: "Reg 10 — 30 working days OR 500 person days triggers notification."
+  },
+  {
+    q: "Form AF1 may be submitted to the HSA:",
+    options: ["Only by registered post", "By registered post, or as directed by the HSA (e-mail to wcu@hsa.ie has been accepted)", "Only by hand delivery to Dublin", "Only through an online portal"],
+    a: 1,
+    why: "The default is registered post; HSA has directed that e-mail to wcu@hsa.ie is acceptable."
+  },
+  {
+    q: "A 'person day' for notification purposes is:",
+    options: ["Any 8-hour period worked by any worker", "One individual, including supervisors and specialists, carrying out construction work for one normal working shift", "Only labourer hours; supervisors are excluded", "Any continuous 24-hour presence on site"],
+    a: 1,
+    why: "AF1 guidance defines a person day as one person for one normal working shift; this includes supervisors and specialists."
+  },
+  {
+    q: "When is a PSDP NOT required?",
+    options: ["Whenever the client is a homeowner", "Where there is only one contractor, the work is under 30 working days and 500 person days, and the work does not involve a particular risk", "Only on projects under €100,000", "Whenever the project is exempt from planning permission"],
+    a: 1,
+    why: "All four tests must fail before no PSDP/PSCS is required."
+  },
+  {
+    q: "If a designer becomes aware that no PSDP has been appointed they must:",
+    options: ["Refuse to continue any design work", "Promptly inform the client of the client's duties (Reg 15(5))", "Notify the HSA directly", "Self-appoint as PSDP"],
+    a: 1,
+    why: "Reg 15(5) places this obligation on designers."
+  },
+  {
+    q: "If a contractor becomes aware that no project supervisors have been appointed they must:",
+    options: ["Continue work but log the issue", "Notify An Garda Síochána", "Promptly inform the client of the client's duties (Reg 24(2))", "Issue a stop-work direction"],
+    a: 2,
+    why: "Reg 24(2) — a new obligation in the 2013 regs — places this on contractors."
+  },
+  {
+    q: "Under Regulation 7 the client must be reasonably satisfied that appointees have:",
+    options: ["ISO 9001 certification", "Allocated, or will allocate, adequate resources to perform their duties", "Tax clearance certificates", "A minimum of €10m PI insurance"],
+    a: 1,
+    why: "Reg 7 is about competence and adequate resources."
+  },
+  {
+    q: "Where there is more than one client on a project, Regulation 6(7) allows:",
+    options: ["Each client to perform every duty independently", "All clients, if they agree, to nominate one or more of them to assume the role of client (others retain duties under Reg 8(1) and 8(3) only)", "The HSA to nominate a lead client", "The contractor to act as client by default"],
+    a: 1,
+    why: "Reg 6(7) — nominated client assumes duties; others still hold Safety File duties under 8(1) and 8(3)."
+  },
+  {
+    q: "Which Regulation gives the PSDP power to issue Directions to designers, contractors or other relevant persons?",
+    options: ["Regulation 11", "Regulation 12", "Regulation 14", "Regulation 20"],
+    a: 2,
+    why: "Reg 14 governs PSDP Directions; Reg 20 covers PSCS Directions."
+  },
+  {
+    q: "Under Reg 14, if a person to whom a Direction was given does not carry it out, the PSDP must:",
+    options: ["Take no further action", "Notify, in writing, the HSA, the client and the person concerned, attaching the written confirmation and any response", "Terminate their own appointment", "Refer the matter to An Bord Pleanála"],
+    a: 1,
+    why: "Reg 14(2) sets out the written notification regime to HSA, client and the recipient."
+  },
+  {
+    q: "The PSDP must retain copies of written Directions and any associated HSA notification:",
+    options: ["In the Safety and Health Plan", "In the project Bill of Quantities", "On the HSA portal only", "With the planning file"],
+    a: 0,
+    why: "Reg 14(3) requires retention with the safety and health plan."
+  },
+  {
+    q: "Which of the following is a 'particular risk' under Schedule 1?",
+    options: ["Painting at ground level", "Work near high-voltage power lines (1 kV AC or 1.5 kV DC or greater)", "Roof tiling on a single-storey dwelling at 3 m height", "Concrete blockwork to first-floor level"],
+    a: 1,
+    why: "Schedule 1 lists HV power lines (≥1 kV AC / 1.5 kV DC) as a particular risk."
+  },
+  {
+    q: "Which of these is NOT listed in Schedule 1 as a particular risk?",
+    options: ["Risk of drowning", "Caissons with a compressed-air atmosphere", "Routine internal plastering", "Assembly or dismantling of heavy prefabricated components"],
+    a: 2,
+    why: "Plastering is not on the Schedule 1 list; all others are."
+  },
+  {
+    q: "A Preliminary Safety and Health Plan must always be prepared by the PSDP where the work:",
+    options: ["Lasts more than 30 working days, more than 500 person days, or involves a particular risk", "Costs more than €500,000", "Is on a Greenfield site", "Involves any subcontractor"],
+    a: 0,
+    why: "Per the decision flowchart — notification thresholds OR particular risk trigger the plan."
+  },
+  {
+    q: "On a private domestic dwelling project, the Preliminary Safety and Health Plan is issued to:",
+    options: ["Every tenderer for PSCS", "The appointed PSCS once appointed (Reg 9(2))", "The HSA in advance", "The local authority"],
+    a: 1,
+    why: "Reg 9(2) — for domestic dwellings the plan goes to the appointed PSCS, not to tenderers."
+  },
+  {
+    q: "Under Regulation 12, on a project in furtherance of a trade/business, the Preliminary Safety and Health Plan must be issued to:",
+    options: ["Only the successful PSCS", "Every party being considered for, or tendering for, the role of PSCS", "Only the design team", "Only the client's solicitor"],
+    a: 1,
+    why: "Reg 9(1) and Reg 12(1)(b) — every party considered or tendering."
+  },
+  {
+    q: "The PSDP must keep a copy of the preliminary Safety and Health Plan available for inspection for:",
+    options: ["12 months from completion", "The duration of the project", "Indefinitely", "5 years from project handover"],
+    a: 1,
+    why: "Reg 12(1)(c) — for the duration of the project."
+  },
+  {
+    q: "Who is responsible for preparing the Safety File?",
+    options: ["The Client", "The PSDP (Reg 13)", "The PSCS (Reg 21)", "The lead designer"],
+    a: 1,
+    why: "Reg 13 places preparation on the PSDP; PSCS supplies information under Reg 21."
+  },
+  {
+    q: "On completion of the project the Safety File must be:",
+    options: ["Held by the PSDP for 10 years", "Promptly delivered to the client (Reg 13(b))", "Lodged with the HSA", "Destroyed in accordance with GDPR"],
+    a: 1,
+    why: "Reg 13(b) — promptly delivered to the client on completion."
+  },
+  {
+    q: "When a building owner disposes of their interest in a structure, the Safety File must be:",
+    options: ["Destroyed", "Passed to the person acquiring the interest (Reg 8(2))", "Returned to the original PSDP", "Filed with the Land Registry"],
+    a: 1,
+    why: "Reg 8(2) — duty passes with the interest in the structure."
+  },
+  {
+    q: "Examples of information the client must pass to the PSDP under Reg 8(5) include:",
+    options: ["Architect's invoices", "Asbestos surveys, geotechnical reports, previous condition surveys, enforcement notices, O&M manuals where no Safety File exists", "Marketing brochures", "Cost plans only"],
+    a: 1,
+    why: "Listed as examples in the deck under Reg 8(5)."
+  },
+  {
+    q: "The competence of a PSDP includes (HSA Guidelines 3.1.1):",
+    options: ["Knowledge of design, familiarity with construction, sound H&S knowledge, communication skills and training", "Membership of a trade union", "Holding a Safe Pass card only", "A degree in civil engineering only"],
+    a: 0,
+    why: "Five criteria listed in HSA Guidelines 3.1.1."
+  },
+  {
+    q: "PSDP 'specified duties' are:",
+    options: ["Statutory duties which cannot be altered by contract", "Contractual duties which can be amended freely", "Optional services offered at extra fee", "Imposed only by the client at appointment"],
+    a: 0,
+    why: "Specified duties are statutory; assigned duties are contractual additions."
+  },
+  {
+    q: "The PSDP's status on a project is:",
+    options: ["A member of the design team, answerable to the lead designer", "Not a member of the design team and not answerable to the client in respect of statutory duties", "An employee of the contractor", "A subcontractor to the PSCS"],
+    a: 1,
+    why: "PSDP is statutorily independent — client must co-operate (Reg 8(4)) but cannot direct on statutory matters."
+  },
+  {
+    q: "'Design' under the Construction Regulations includes:",
+    options: ["Drawings only", "Drawings, specifications, calculations and other expressions of purpose — possibly even the BOQ", "Only structural calculations", "Only 3D BIM models"],
+    a: 1,
+    why: "Definition is deliberately broad."
+  },
+  {
+    q: "A 'structure' under the regulations includes:",
+    options: ["Only completed buildings", "Buildings, roads, pipelines, cables, temporary works including scaffolding and ladders, and fixed plant", "Only permanent works", "Only buildings above 8 m in height"],
+    a: 1,
+    why: "Reg 2(1) definition is wide-ranging."
+  },
+  {
+    q: "Under the Construction Regulations a sub-contractor is:",
+    options: ["Outside the scope of the regulations", "Deemed to be a 'contractor' — potentially triggering the need to appoint PSDP/PSCS", "Regulated only by the main contractor's policies", "Regulated only where they directly employ staff"],
+    a: 1,
+    why: "Sub-contractors fall within the contractor definition; the client must take account of this."
+  },
+  {
+    q: "The hierarchy in the General Principles of Prevention starts with:",
+    options: ["Personal Protective Equipment", "Avoid the risk", "Issue safety signage", "Provide training"],
+    a: 1,
+    why: "Avoidance sits at the top of the hierarchy, PPE near the bottom."
+  },
+  {
+    q: "The Safety, Health and Welfare at Work (General Application) Regulations 2007–2016 are structured as:",
+    options: ["5 Parts and 4 Schedules", "8 Parts and 10 Schedules", "12 Parts and 12 Schedules", "20 Parts and 20 Schedules"],
+    a: 1,
+    why: "Deck states 8 Parts and 10 Schedules."
+  },
+  {
+    q: "Daily noise exposure: the limit value (which must not be exceeded) is:",
+    options: ["80 dB", "85 dB", "87 dB", "90 dB"],
+    a: 2,
+    why: "Limit value 87 dB; upper action 85 dB; lower action 80 dB."
+  },
+  {
+    q: "Under the noise regulations the LOWER exposure action value is:",
+    options: ["75 dB", "80 dB", "85 dB", "90 dB"],
+    a: 1,
+    why: "Lower action value is 80 dB (was 85 dB)."
+  },
+  {
+    q: "The airborne asbestos exposure limit (8-hour TWA) is:",
+    options: ["1.0 fibres per cm³", "0.5 fibres per cm³", "0.1 fibres per cm³", "0.01 fibres per cm³"],
+    a: 2,
+    why: "0.1 fibres per cm³ as an 8-hour TWA under the Exposure to Asbestos Regulations 2006/2010."
+  },
+  {
+    q: "The three main types of asbestos are:",
+    options: ["Crocidolite (blue), Amosite (brown), Chrysotile (white)", "Crocidolite (white), Amosite (blue), Chrysotile (brown)", "Crocidolite (red), Amosite (green), Chrysotile (yellow)", "Only blue and white asbestos exist"],
+    a: 0,
+    why: "Standard colour shorthand: blue/brown/white."
+  },
+  {
+    q: "The two main asbestos survey types are:",
+    options: ["Visual Survey and Statutory Survey", "Management Survey and Demolition & Refurbishment Survey", "Pre-purchase Survey and Pre-let Survey", "Air Sampling Survey and Bulk Survey only"],
+    a: 1,
+    why: "Management survey for routine occupation; D&R survey for intrusive works."
+  },
+  {
+    q: "Under the ACEI conditions of engagement, professional indemnity cover should be no less than:",
+    options: ["€1 million any one claim", "€2 million any one claim", "€5 million any one claim, with separate aggregate limits for pollution/contamination and asbestos", "€10 million any one claim, no aggregate"],
+    a: 2,
+    why: "Slide deck specifies €5m any one claim with separate aggregate limits for pollution/contamination and asbestos."
+  },
+  {
+    q: "Which of the following is the current HSA Code of Practice on roofwork?",
+    options: ["Code of Practice for Safety in Roofwork (2008)", "Code of Practice for Safety in Roofwork (2016)", "Code of Practice for Roofers (2020)", "There is no roofwork COP"],
+    a: 1,
+    why: "Roofwork COP — 2016 version is the one referenced in the deck."
+  },
+  {
+    q: "The Roofwork Code of Practice states that you should:",
+    options: ["Assume the roof is safe to walk on unless told otherwise", "Assume the roof is fragile unless confirmed otherwise by a competent person", "Only use ladders for roof access", "Always erect a full scaffold around every roof"],
+    a: 1,
+    why: "Stated explicitly in the deck and COP."
+  },
+  {
+    q: "Failure to comply with an HSA Code of Practice:",
+    options: ["Is an automatic criminal offence", "Of itself does not render a person liable to civil or criminal proceedings, but is admissible as evidence", "Voids insurance cover automatically", "Disqualifies the engineer from practice"],
+    a: 1,
+    why: "COPs are admissible as evidence; non-compliance must be justified by another route to compliance."
+  },
+  {
+    q: "Where works are to take place near a high-voltage power line (≥1 kV) the Code of Practice for Avoiding Danger from Underground Services requires:",
+    options: ["Only a competent contractor; no PSDP", "Appointment of a PSDP and a Preliminary Safety & Health Plan", "An ESB witness on site only", "No special action below 5 kV"],
+    a: 1,
+    why: "HV work is a particular risk — PSDP and PHSP required."
+  },
+  {
+    q: "Under the Code of Practice for the Design and Installation of Anchors, the PSDP should:",
+    options: ["Specify all anchors personally", "Coordinate the activities of the anchor specifier with other designers and coordinate sign-off via a Permanent or Temporary Works Design Certificate (or similar)", "Leave anchor design entirely to the contractor with no coordination", "Notify the HSA before any anchors are installed"],
+    a: 1,
+    why: "Anchors COP — coordination and sign-off by PSDP with the anchor specifier."
+  },
+  {
+    q: "Suggested content for the Preliminary Safety and Health Plan does NOT typically include:",
+    options: ["A general description of the project and timeframe basis", "Known existing environment and related restrictions", "Detailed contractor cost breakdowns", "Identification of particular risks and rules for continued liaison"],
+    a: 2,
+    why: "Cost detail is not part of the PHSP; the other three are standard content."
+  },
+  {
+    q: "Regarding method statements, the PSDP:",
+    options: ["Must approve every contractor method statement", "Has no role in enforcing site safety, but may request method statements as evidence and must check those that translate design intent", "Must rewrite any defective method statement", "Has no interest in method statements at all"],
+    a: 1,
+    why: "PSDP does not enforce site safety; common-law duty to advise applies if a hazard is seen."
+  },
+  {
+    q: "Which Regulation requires the PSCS to provide, in writing, all information necessary for the PSDP to complete the Safety File?",
+    options: ["Regulation 13", "Regulation 16", "Regulation 21", "Regulation 24"],
+    a: 2,
+    why: "Reg 21 — PSCS duties relating to the Safety File."
+  },
+  {
+    q: "Which of these is the BEST description of the purpose of the Safety File?",
+    options: ["A record of contractor invoices", "A record of safety and health information for the end user, alerting those responsible for the structure to significant risks that will need to be addressed during subsequent maintenance, repair, refurbishment, extension or demolition", "A list of HSA inspections", "A snagging list for the client"],
+    a: 1,
+    why: "Definition adapted from HSA Guidelines."
+  },
+  {
+    q: "Which section of the Safety, Health and Welfare at Work Act 2005 relates specifically to construction work?",
+    options: ["Section 8", "Section 15", "Section 17", "Section 58"],
+    a: 2,
+    why: "Section 17 of the 2005 Act addresses construction; Section 15 covers control of a place of work; Section 58 empowers the Minister to make regulations."
+  },
+  {
+    q: "Which section of the 2005 Act empowers the Minister to make Regulations?",
+    options: ["Section 13", "Section 17", "Section 20", "Section 58"],
+    a: 3,
+    why: "Section 58 of the 2005 Act gives the Minister the regulation-making power."
+  },
+  {
+    q: "Section 15 of the Safety, Health and Welfare at Work Act 2005 relates to:",
+    options: ["Designers' duties", "Control of a place of work", "Welfare facilities", "Reporting of dangerous occurrences"],
+    a: 1,
+    why: "Section 15 addresses control of a place of work — relevant where an organisation has effective control of premises."
+  },
+  {
+    q: "AF1 Notifications by registered post should be addressed to:",
+    options: ["HSA, The Metropolitan Building, James Joyce Street, Dublin 1", "HSA, Phoenix Park, Dublin 8", "Department of the Environment, Custom House, Dublin 1", "Engineers Ireland, Clyde Road, Dublin 4"],
+    a: 0,
+    why: "AF1 form states the Metropolitan Building, James Joyce Street, Dublin 1; e-mail to wcu@hsa.ie also accepted."
+  },
+  {
+    q: "Regulation 11 of the 2013 Construction Regulations places on the PSDP a duty to:",
+    options: ["Prepare the Safety File only", "Organise co-operation and ensure co-ordination, including taking account of the general principles of prevention and any health and safety plan", "Notify the HSA on the AF1 form", "Inspect the site weekly"],
+    a: 1,
+    why: "Reg 11(1) covers co-operation, co-ordination and the application of the general principles of prevention."
+  },
+  {
+    q: "Under Regulation 11(1)(a) the PSDP must take account of the general principles of prevention when:",
+    options: ["Auditing site safety only", "Planning the work and estimating the time required for the project", "Issuing payment certificates", "Witnessing the contractor's safety statement"],
+    a: 1,
+    why: "Reg 11(1)(a) explicitly links the principles to planning and estimating time."
+  },
+  {
+    q: "Which Regulation governs the PSDP's duties relating to the Safety File?",
+    options: ["Regulation 8", "Regulation 12", "Regulation 13", "Regulation 21"],
+    a: 2,
+    why: "Reg 13 — PSDP prepares and delivers the Safety File. (Reg 8 covers the Client; Reg 21 covers the PSCS.)"
+  },
+  {
+    q: "Which Regulation places duties on the PSCS in respect of the Safety and Health Plan?",
+    options: ["Regulation 9", "Regulation 12", "Regulation 16", "Regulation 24"],
+    a: 2,
+    why: "Reg 16 — PSCS develops and adjusts the plan during construction."
+  },
+  {
+    q: "Under Regulation 11(2) the appointment of a separate safety co-ordinator by the PSDP is:",
+    options: ["Mandatory on every project", "Generally not necessary", "Decided by the HSA inspector", "Required only on Greenfield sites"],
+    a: 1,
+    why: "Reg 11(2) states the appointment of a safety co-ordinator is generally not necessary; Reg 11(3) confirms it does not relieve the PSDP/client of their duties."
+  },
+  {
+    q: "Under Regulation 14, PSDP Directions:",
+    options: ["Must always be in writing from the outset", "May be given verbally and must be confirmed in writing if the recipient does not carry them out", "Are only valid through the HSA", "Become binding only after court approval"],
+    a: 1,
+    why: "Reg 14(1) allows directions to be given; written confirmation is required when not carried out (Reg 14(1)(b))."
+  },
+  {
+    q: "Which of the following appears on the Schedule 1 list of particular risks?",
+    options: ["Risk of drowning", "Internal painting", "Carpet laying", "Routine glazing"],
+    a: 0,
+    why: "Risk of drowning is item 5 on the Schedule 1 non-exhaustive list."
+  },
+  {
+    q: "Which of the following is listed under Schedule 1 as a particular risk?",
+    options: ["Light demolition", "Wells, underground earthworks or tunnels", "Routine bricklaying", "External rendering"],
+    a: 1,
+    why: "Wells, underground earthworks or tunnels is item 6 on the Schedule 1 list."
+  },
+  {
+    q: "Which European Directive is referenced in Schedule 1 in relation to ionising radiation activities?",
+    options: ["Directive 92/57/EEC", "Directive 96/29/Euratom", "Directive 2009/148/EC", "Directive 89/391/EEC"],
+    a: 1,
+    why: "Schedule 1 references Directive 96/29/Euratom for ionising radiation."
+  },
+  {
+    q: "Schedule 1 identifies which of the following caisson works as a particular risk?",
+    options: ["Caissons with battered sides", "Caissons with reinforced concrete walls", "Caissons with a compressed-air atmosphere", "Caissons under continuous dewatering"],
+    a: 2,
+    why: "Schedule 1 — caissons with a compressed-air atmosphere are listed."
+  },
+  {
+    q: "Schedule 1 identifies which of the following as a particular risk?",
+    options: ["Assembly or dismantling of heavy prefabricated components", "Lifting any precast unit", "Manual handling of any block", "Use of mobile scaffolds only"],
+    a: 0,
+    why: "Assembly/dismantling of heavy prefabricated components is item 10 of Schedule 1."
+  },
+  {
+    q: "Which year is the current HSA Code of Practice for Working in Confined Spaces?",
+    options: ["2001", "2008", "2017", "2020"],
+    a: 2,
+    why: "The current Confined Spaces COP is 2017."
+  },
+  {
+    q: "The current HSA Code of Practice for Avoiding Danger from Underground Services was published in:",
+    options: ["2008", "2013", "2016", "2022"],
+    a: 2,
+    why: "Underground Services COP — 2016 edition."
+  },
+  {
+    q: "The current HSA Code of Practice for Access and Working Scaffolds was published in:",
+    options: ["2002", "2008", "2014", "2020"],
+    a: 1,
+    why: "Scaffolds COP — 2008 edition."
+  },
+  {
+    q: "The HSA Code of Practice for the Design and Installation of Anchors was published in:",
+    options: ["2010", "2012", "2017", "2020"],
+    a: 2,
+    why: "Anchors COP — 2017 edition."
+  },
+  {
+    q: "The HSA Code of Practice for Avoiding Danger from Overhead Lines was published in:",
+    options: ["2008", "2014", "2020", "There is no overhead lines COP"],
+    a: 0,
+    why: "Overhead Lines COP — 2008 edition."
+  },
+  {
+    q: "If noise level varies significantly between days, exposure should be measured over:",
+    options: ["A single day", "A working week", "A 12-hour shift only", "A 28-day reference period"],
+    a: 1,
+    why: "Where noise varies, measurement is taken over a week."
+  },
+  {
+    q: "The Control of Vibration at Work provisions in the General Application Regulations cover:",
+    options: ["Only hand-arm vibration", "Only whole-body vibration", "Hand-arm and whole-body (mechanical) vibration", "Only vibration in plant rooms"],
+    a: 2,
+    why: "Both hand-arm and whole-body vibration are addressed under Part 5, Chapter 2."
+  },
+  {
+    q: "The majority of asbestos-containing materials were prohibited in Ireland in:",
+    options: ["1985", "1994", "2000", "2010"],
+    a: 1,
+    why: "Most ACMs were prohibited in 1994; some remained until 2000."
+  },
+  {
+    q: "Some asbestos-containing materials remained in use in Ireland until:",
+    options: ["1985", "1990", "2000", "2006"],
+    a: 2,
+    why: "Final phase-out was completed by 2000."
+  },
+  {
+    q: "Asbestos was extensively used as a building material in Ireland from:",
+    options: ["1900s to 1940s", "1950s to mid-1980s", "1970s to 2000", "Only in the 1990s"],
+    a: 1,
+    why: "1950s through to the mid-1980s — the 'magic mineral' era."
+  },
+  {
+    q: "In HSA v Bus Éireann, Keltank, McArdles and Meath County Council (Dublin Circuit Criminal Court, June 2008), Meath County Council was fined approximately:",
+    options: ["€5,000", "€25,000", "€100,000", "€1,000,000"],
+    a: 2,
+    why: "Meath County Council was fined €100,000 for failing to appoint a PSCS and draw up a safety and health plan for roadworks."
+  },
+  {
+    q: "Under the General Principles of Prevention, which is preferred?",
+    options: ["PPE for individual workers", "Collective protective measures over individual", "Training only", "Signage only"],
+    a: 1,
+    why: "Collective protection ranks above individual protection in the hierarchy."
+  },
+  {
+    q: "Which of the following is NOT explicitly required by Reg 12(1)(a) in the Preliminary Safety & Health Plan?",
+    options: ["A general description of the project and intended completion time", "Information on other work activities on the site", "A cost breakdown by trade", "The location of electricity, water and sewage connections (where appropriate)"],
+    a: 2,
+    why: "Reg 12(1)(a) lists six content items — costs are not among them."
+  },
+  {
+    q: "The format and presentation of the Safety File:",
+    options: ["Is fixed by statute as a hard-copy lever arch folder", "May be agreed at the outset and is often specified in the PSDP appointment", "Must always be in BIM format", "Is decided unilaterally by the contractor"],
+    a: 1,
+    why: "Format should be agreed early; the deck notes it is often specified in the PSDP appointment."
+  },
+  {
+    q: "Web-based digital safety files are specified in most:",
+    options: ["Private domestic projects", "Public sector projects", "Renovation projects", "Demolition projects"],
+    a: 1,
+    why: "Deck notes web-based digital safety files are specified in most public sector projects."
+  },
+  {
+    q: "A BIM-based digital safety file is best characterised by:",
+    options: ["A single PDF on CD", "Integration with or being complementary to the project's BIM model, with information uploaded throughout the design process", "Replacing the need for any handover to the client", "Being held only by the designer"],
+    a: 1,
+    why: "BIM-based files are integrated with the model and populated as the project proceeds."
+  },
+  {
+    q: "On refurbishment of a structure built before the Safety File requirement became law, the Safety File:",
+    options: ["Must cover the entire structure as-built", "Need only deal with the construction work carried out (though notable issues like asbestos elsewhere should be flagged)", "Is not required at all", "Must be a full as-built BIM model"],
+    a: 1,
+    why: "Per the deck — Safety File deals with the works done; particular concerns outside the scope should still be noted."
+  },
+  {
+    q: "Under the Code of Practice for Avoiding Danger from Underground Services, designers must:",
+    options: ["Pass up-to-date maps and records to the PSDP as early as reasonably practicable", "Only check records if asked by the contractor", "Always commission new GPR surveys", "Rely solely on the contractor's site investigation"],
+    a: 0,
+    why: "Designers' duty to share information early is highlighted in the COP."
+  },
+  {
+    q: "The Code of Practice for Avoiding Danger from Underground Services places the onus to ensure designers identify existing hazardous underground services on:",
+    options: ["The PSCS", "The PSDP", "The client", "The local authority"],
+    a: 1,
+    why: "Per the deck — the onus is on the PSDP."
+  },
+  {
+    q: "Under the Anchors Code of Practice, the PSDP should coordinate sign-off of the anchor design using:",
+    options: ["A method statement", "A Permanent Works or Temporary Works Design Certificate (or similar project-specific certificate)", "An AF1 form", "A BCAR Certificate of Compliance"],
+    a: 1,
+    why: "PW/TW Design Certificates (or similar) are the recommended sign-off vehicles."
+  },
+  {
+    q: "The two approaches identified in the Anchors Code of Practice are:",
+    options: ["Approach A — anchor supplier is the anchor specifier; Approach B — consultant is the anchor specifier", "Approach A — site engineer specifies; Approach B — clerk of works specifies", "Approach A — manufacturer supplies; Approach B — contractor improvises", "Only one approach is allowed"],
+    a: 0,
+    why: "Joint EI/ACEI advice note sets out Approaches A and B."
+  },
+  {
+    q: "Compliance with an HSA Code of Practice is described as:",
+    options: ["A guarantee of statutory compliance", "The simplest way of complying with one's duties under the 2005 Act", "Optional but disqualifying if not followed", "Reserved for HSA inspectors"],
+    a: 1,
+    why: "Following the COP is the simplest route to compliance; alternatives must demonstrate compliance with the Act."
+  },
+  {
+    q: "Under enforcement, the HSA may:",
+    options: ["Only issue advisory letters", "Issue an improvement notice or direction, prosecute (leading to fine and/or imprisonment), or stop design or construction", "Suspend the engineer's professional registration directly", "Refer the matter automatically to the DPP"],
+    a: 1,
+    why: "Enforcement spectrum runs from censure through prosecution to stop notices."
+  },
+  {
+    q: "'Designing for Safety in Construction' is jointly published by:",
+    options: ["HSA only", "Engineers Ireland / ACEI / RIAI", "The EU Commission only", "The DPP and HSA"],
+    a: 1,
+    why: "Joint EI/ACEI/RIAI publication, authored originally by Jack Kavanagh."
+  },
+  {
+    q: "The PSDP's role in enforcement of site safety is:",
+    options: ["Primary — they police the site daily", "Secondary — they audit weekly", "They have no role in the enforcement of site safety (though a common-law duty to advise the PSCS arises if they see something dangerous)", "Subordinate to the design team leader"],
+    a: 2,
+    why: "Site safety enforcement sits with the PSCS; the PSDP retains a common-law duty to advise."
+  },
+  {
+    q: "If the PSDP visits a site and observes something obviously dangerous, they should:",
+    options: ["Take no action — site safety is the PSCS's responsibility", "Notify the PSCS as a matter of common-law duty", "Order the works stopped themselves", "Submit a Direction to the HSA directly"],
+    a: 1,
+    why: "Common-law duty to advise the PSCS — the PSDP does not have site stop-work powers."
+  },
+  {
+    q: "A contractor's method statement may constitute 'design' under the regulations when:",
+    options: ["It includes an expression of purpose to which the project is to be executed", "It is signed by a chartered engineer only", "It runs to more than 10 pages", "It refers to a specific subcontractor"],
+    a: 0,
+    why: "If it expresses purpose (i.e. translates design intent), it may constitute design — and the PSDP has interest in it."
+  },
+  {
+    q: "The PSDP should ensure that the PSCS:",
+    options: ["Reports reportable accidents to the HSA and considers a forum for near-miss reporting and assessment", "Reports all accidents directly to An Garda Síochána", "Submits weekly reports to the PSDP for onward transmission to the HSA", "Reports only fatalities"],
+    a: 0,
+    why: "PSDP should ensure reportable accidents reach the HSA and encourage near-miss reporting."
+  },
+  {
+    q: "Reg 13(b) requires the Safety File to be 'promptly delivered' to the client on completion. The HSA Guidelines suggest:",
+    options: ["A single hand-over only on practical completion of all works", "A common-sense, possibly staged approach (e.g. O&M manuals on substantial completion; site data/drawings on final completion)", "Delivery only after the defects liability period", "Delivery only via the client's solicitor"],
+    a: 1,
+    why: "Guidelines endorse a common-sense approach — staged delivery of file elements is acceptable."
+  },
+  {
+    q: "A client may appoint themselves as PSDP:",
+    options: ["Never", "Only if they hold a Safe Pass card", "Provided they are competent and have adequate resources", "Only with HSA prior approval"],
+    a: 2,
+    why: "Reg 6(2) — client self-appointment is permitted provided competence and resources tests are satisfied."
+  },
+  {
+    q: "Under Regulation 6(4) the appointment of project supervisors may be:",
+    options: ["Made only at the start of the project", "Made, terminated, changed or renewed as necessary", "Changed only with HSA approval", "Terminated only by the appointee"],
+    a: 1,
+    why: "Reg 6(4) allows the client to make, terminate, change or renew appointments as necessary."
+  },
+  {
+    q: "Under Reg 2(1) a 'project' is defined to include or be intended to include:",
+    options: ["Any commercial activity", "Construction work", "Property transactions", "Building maintenance contracts only"],
+    a: 1,
+    why: "'Project' is defined by reference to construction work."
+  },
+  {
+    q: "The 'design process' covered by the Regulations includes:",
+    options: ["Only initial concept drawings", "Preparing, designing and alterations — covering both permanent and temporary works", "Only post-tender design", "Only structural design"],
+    a: 1,
+    why: "Definition embraces preparing, designing and alterations of permanent and temporary works."
+  },
+  {
+    q: "Any 'assigned duties' (as distinct from 'specified duties') given to a Project Supervisor must be:",
+    options: ["Refused by the project supervisor", "Necessary to allow the client to comply with the regulations and assigned at appointment", "Approved by the HSA", "Limited to financial matters"],
+    a: 1,
+    why: "Assigned duties are contractual additions, necessary to support client compliance, fixed at appointment."
+  },
+  {
+    q: "If a project involves an existing structure for which there is no Safety File, the client should:",
+    options: ["Refuse to provide any information", "Provide information under Reg 8(5) — e.g. asbestos surveys, geotechnical reports, condition surveys, enforcement notices, O&M manuals", "Wait until the contractor requests information", "Commission a new BIM model"],
+    a: 1,
+    why: "Reg 8(5) duty applies — the client must provide what is in their possession or reasonably obtainable."
+  }
+];
+
+const form = document.getElementById('examForm');
+const resultsContainer = document.getElementById('resultsContainer');
+const submitBtn = document.getElementById('submitBtn');
+const resetBtn = document.getElementById('resetBtn');
+const answeredEl = document.getElementById('answered');
+const scoreEl = document.getElementById('scoreNow');
+const pctEl = document.getElementById('pctNow');
+const currentQEl = document.getElementById('currentQ');
+const progressBar = document.getElementById('progressBar');
+
+const state = {
+  answers: new Array(QUESTIONS.length).fill(null),
+  graded: new Array(QUESTIONS.length).fill(false)
+};
+let viewObserver = null;
+
+function render() {
+  form.innerHTML = '';
+  QUESTIONS.forEach((q, i) => {
+    const div = document.createElement('div');
+    div.className = 'question';
+    div.id = 'q' + i;
+    let optionsHtml = '';
+    q.options.forEach((opt, j) => {
+      optionsHtml += `
+        <li>
+          <label data-q="${i}" data-opt="${j}">
+            <input type="radio" name="q${i}" value="${j}">
+            <span>${opt}</span>
+          </label>
+        </li>`;
+    });
+    div.innerHTML = `
+      <h3><span class="q-num">Q${i + 1}.</span>${q.q}</h3>
+      <ul class="options">${optionsHtml}</ul>
+      <div class="feedback" id="fb${i}" style="display:none;"></div>
+    `;
+    form.appendChild(div);
+  });
+  form.addEventListener('change', onAnswerChange);
+  setupViewTracking();
+}
+
+function onAnswerChange(e) {
+  if (e.target.tagName !== 'INPUT' || e.target.type !== 'radio') return;
+  const i = parseInt(e.target.name.replace('q', ''), 10);
+  if (state.graded[i]) return;
+  const chosen = parseInt(e.target.value, 10);
+  gradeQuestion(i, chosen);
+  updateScoreboard();
+}
+
+function gradeQuestion(i, chosen) {
+  const q = QUESTIONS[i];
+  const labels = document.querySelectorAll(`#q${i} .options label`);
+  const fb = document.getElementById('fb' + i);
+  labels.forEach(l => l.classList.remove('correct', 'incorrect', 'scored'));
+  fb.style.display = 'block';
+  state.answers[i] = chosen;
+  state.graded[i] = true;
+  if (chosen === q.a) {
+    labels[chosen].classList.add('correct', 'scored');
+    fb.className = 'feedback right';
+    fb.innerHTML = `<strong>Correct.</strong> ${q.why} <em style="opacity:.7;">Your first answer is what counts — feel free to click around the other options for review.</em>`;
+  } else if (chosen === -1) {
+    labels[q.a].classList.add('correct');
+    fb.className = 'feedback wrong';
+    fb.innerHTML = `<strong>Not answered.</strong> Correct answer: <em>${q.options[q.a]}</em>. ${q.why}`;
+  } else {
+    labels[chosen].classList.add('incorrect', 'scored');
+    labels[q.a].classList.add('correct');
+    fb.className = 'feedback wrong';
+    fb.innerHTML = `<strong>Incorrect.</strong> Correct answer: <em>${q.options[q.a]}</em>. ${q.why} <em style="opacity:.7;">Your first answer is what counts — feel free to click around the other options for review.</em>`;
+  }
+}
+
+function updateScoreboard() {
+  let answered = 0;
+  let score = 0;
+  state.graded.forEach((g, i) => {
+    if (g) {
+      answered++;
+      if (state.answers[i] === QUESTIONS[i].a) score++;
+    }
+  });
+  answeredEl.textContent = answered;
+  scoreEl.textContent = score;
+  const pct = Math.round((score / QUESTIONS.length) * 100);
+  pctEl.textContent = pct;
+  progressBar.style.width = ((answered / QUESTIONS.length) * 100) + '%';
+}
+
+function setupViewTracking() {
+  if (viewObserver) viewObserver.disconnect();
+  const headerH = document.querySelector('header').offsetHeight;
+  viewObserver = new IntersectionObserver((entries) => {
+    let topmost = null;
+    let topmostY = Infinity;
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const r = entry.target.getBoundingClientRect();
+        if (r.top < topmostY && r.bottom > headerH) {
+          topmostY = r.top;
+          topmost = entry.target;
+        }
+      }
+    });
+    if (topmost) {
+      const idx = parseInt(topmost.id.replace('q', ''), 10);
+      currentQEl.textContent = idx + 1;
+    }
+  }, {
+    rootMargin: `-${headerH + 10}px 0px -55% 0px`,
+    threshold: 0
+  });
+  document.querySelectorAll('.question').forEach(el => viewObserver.observe(el));
+}
+
+function submitExam() {
+  const unanswered = [];
+  QUESTIONS.forEach((q, i) => {
+    if (!state.graded[i]) {
+      unanswered.push(i + 1);
+      gradeQuestion(i, -1);
+    }
+  });
+  updateScoreboard();
+
+  const score = parseInt(scoreEl.textContent, 10);
+  const pct = Math.round((score / QUESTIONS.length) * 100);
+  const pass = pct >= 70;
+  resultsContainer.innerHTML = `
+    <div class="results">
+      <h2>${pass ? 'Pass' : 'Below pass mark'}</h2>
+      <div class="score">${score} / ${QUESTIONS.length}</div>
+      <p><strong>${pct}%</strong> ${pass ? '— above the 70% indicative pass mark.' : '— below the 70% indicative pass mark.'}</p>
+      ${unanswered.length ? `<p style="margin-top:10px; font-size:13px;">Skipped (marked incorrect): Q${unanswered.join(', Q')}</p>` : ''}
+      <p style="margin-top:14px; font-size:13px;">Scroll up to review feedback on every question.</p>
+    </div>
+  `;
+  resultsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  submitBtn.disabled = true;
+}
+
+function resetExam() {
+  if (!confirm('Reset all answers and clear your score?')) return;
+  state.answers.fill(null);
+  state.graded.fill(false);
+  resultsContainer.innerHTML = '';
+  submitBtn.disabled = false;
+  render();
+  updateScoreboard();
+  currentQEl.textContent = '1';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+submitBtn.addEventListener('click', submitExam);
+resetBtn.addEventListener('click', resetExam);
+
+render();
+updateScoreboard();
+</script>
+</body>
+</html>
